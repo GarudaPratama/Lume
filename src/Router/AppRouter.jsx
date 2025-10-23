@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "../pages/LandingPage";
 import AppPage from "../pages/AppPage";
-import Login from "../components/auth/Login";
-import PrivateRoute from "../components/auth/PrivateRoute";
+import Login from "../components/auth/Login"; // pastikan Login.jsx persis
+import PrivateRoute from "../components/auth/PrivateRoute"; // pastikan PrivateRoute.jsx persis
 
 export default function AppRouter() {
   return (
