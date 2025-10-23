@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import heroImg from "../../assets/hero-img.png";
-import logo from "../../assets/logo-lume.png";
+import logo from "../../assets/Lume-Logo.png";
 
 export default function HeroSection() {
   return (
