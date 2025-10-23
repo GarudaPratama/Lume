@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "../pages/LandingPage";
 import AppPage from "../pages/AppPage";
-import Login from "../components/auth/Login"; // pastikan Login.jsx persis
-import PrivateRoute from "../components/auth/PrivateRoute"; // pastikan PrivateRoute.jsx persis
+import Login from "../components/auth/Login";
+import SignUp from "../components/auth/SignUp";
+import PrivateRoute from "../components/auth/PrivateRoute";
 
 export default function AppRouter() {
   return (
@@ -10,6 +11,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route
           path="/app"
           element={

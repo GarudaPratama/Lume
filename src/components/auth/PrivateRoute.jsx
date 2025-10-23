@@ -6,8 +6,8 @@ export default function PrivateRoute({ children }) {
   const [user, loading] = useAuthState(auth);
 
   if (loading) return <div className="text-center mt-32">Loading...</div>;
-
-  if (!user) return <Navigate to="/" replace />;
+  if (!user) return <Navigate to="/login" replace />;
 
   return children;
 }
+  
