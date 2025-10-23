@@ -33,7 +33,7 @@ export default function SignUp() {
         onSubmit={handleSignUp}
         className="bg-lume-white p-10 rounded-3xl shadow-md w-full max-w-md text-center"
       >
-        <h2 className="font-display text-3xl mb-6">Create Your Account</h2>
+        <h2 className="font-display text-3xl mb-6 text-lume-charcoal">Create Your Account</h2>
 
         {error && (
           <p className="text-red-500 text-sm mb-4 font-body">{error}</p>
