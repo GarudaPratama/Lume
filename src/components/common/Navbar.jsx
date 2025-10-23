@@ -9,12 +9,15 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     await auth.signOut();
-    navigate("/login");
+    navigate("/login"); // redirect ke login
   };
 
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-lume-white shadow-md">
-      <h1 className="font-display text-2xl font-bold cursor-pointer" onClick={() => navigate("/")}>
+      <h1
+        className="font-display text-2xl font-bold cursor-pointer"
+        onClick={() => navigate("/")}
+      >
         Lumé
       </h1>
 

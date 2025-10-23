@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      navigate("/app"); // redirect ke app setelah login
     } catch (err) {
       setError(err.message);
     }
@@ -23,12 +27,10 @@ export default function Login() {
         onSubmit={handleLogin}
         className="bg-lume-white p-10 rounded-3xl shadow-md w-full max-w-md text-center"
       >
-        <h2 className="font-display text-3xl mb-6 text-lume-charcoal">Login to Lumé</h2>
+        <h2 className="font-display text-3xl mb-6">Login to Lumé</h2>
 
         {error && (
-          <p className="text-red-500 text-sm mb-4 font-body">
-            {error}
-          </p>
+          <p className="text-red-500 text-sm mb-4 font-body">{error}</p>
         )}
 
         <input
@@ -36,7 +38,7 @@ export default function Login() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 rounded-xl border border-lume-gray mb-4 bg-lume-white text-lume-black placeholder-lume-gray focus:border-lume-gold outline-none font-body"
+          className="w-full p-3 rounded-xl border border-lume-gray mb-4 bg-lume-white text-lume-black placeholder-lume-charcoal focus:border-lume-gold outline-none font-body"
           required
         />
 
@@ -45,7 +47,7 @@ export default function Login() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 rounded-xl border border-lume-gray mb-6 bg-lume-white text-lume-black placeholder-lume-gray focus:border-lume-gold outline-none font-body"
+          className="w-full p-3 rounded-xl border border-lume-gray mb-6 bg-lume-white text-lume-black placeholder-lume-charcoal focus:border-lume-gold outline-none font-body"
           required
         />
 
@@ -57,7 +59,13 @@ export default function Login() {
         </button>
 
         <p className="mt-4 text-sm font-body text-lume-charcoal">
-          Don't have an account? <span className="text-lume-gold">Sign up</span>
+          Don't have an account?{" "}
+          <span
+            className="text-lume-gold cursor-pointer"
+            onClick={() => navigate("/signup")}
+          >
+            Sign Up
+          </span>
         </p>
       </form>
     </div>
