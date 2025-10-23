@@ -1,22 +1,35 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/Lume-Logo.png";
+import modelImage from "../../assets/LUME.png"; // ganti sesuai path gambarmu
 
 export default function HeroSection() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 md:px-20">
-      <img src={logo} alt="Lumé Logo" className="w-24 mb-4" />
-      <h1 className="font-display text-6xl md:text-7xl font-bold leading-tight">
-        Elegance meets <span className="text-lume-gold">Intelligence</span>
-      </h1>
-      <p className="font-body text-lume-charcoal text-lg mt-6 max-w-md">
-        Discover your perfect outfit through AI recommendations tailored to your style.
-      </p>
-      <Link
-        to="/app"
-        className="inline-block mt-10 bg-lume-black text-lume-white px-8 py-3 rounded-full font-body font-medium hover:bg-lume-gold hover:text-lume-black transition-all"
-      >
-        Try Lume Now
-      </Link>
+    <section className="relative min-h-screen flex items-center justify-center text-center bg-[#FAEEDC] overflow-hidden">
+
+      <img
+        src={modelImage}
+        alt="Model wearing outfit"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+
+      <div className="absolute inset-0 bg-[#FAEEDC]/60" />
+
+
+      <div className="relative z-10 px-6 max-w-3xl">
+        <h1 className="font-display text-5xl md:text-6xl font-bold text-gray-800 leading-tight drop-shadow-md">
+          Find Your <br />
+          <span className="text-gray-900">Perfect Outfit</span>
+        </h1>
+        <p className="font-body text-gray-700 text-lg mt-4 drop-shadow-sm">
+          Discover the latest trends and styles to elevate your wardrobe.
+        </p>
+        <Link
+          to="/shop"
+          className="inline-block mt-8 bg-[#C36B3D] text-white px-8 py-3 rounded-md font-body font-medium hover:bg-[#a95c34] transition-all shadow-md"
+        >
+          Try Lume Now
+        </Link>
+      </div>
     </section>
   );
 }
