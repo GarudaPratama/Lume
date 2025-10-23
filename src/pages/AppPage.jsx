@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AppLayout from "../components/app/AppLayout";
 import StepUpload from "../components/app/StepUpload";
 import StepPreferences from "../components/app/StepPreferences";
@@ -9,6 +10,7 @@ export default function AppPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [outfitResult, setOutfitResult] = useState(null);
+  const navigate = useNavigate();
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
@@ -29,7 +31,9 @@ export default function AppPage() {
   return (
     <AppLayout>
       <div className="max-w-3xl mx-auto text-center">
-        <h1 className="font-display text-4xl md:text-5xl mb-8">Your Personal Stylist</h1>
+        <h1 className="font-display text-4xl md:text-5xl mb-8">
+          Your Personal Stylist
+        </h1>
 
         {loading && <Loader />}
 
@@ -46,6 +50,14 @@ export default function AppPage() {
             }}
           />
         )}
+
+        {/* Tombol Back to LandingPage */}
+        <button
+          onClick={() => navigate("/")}
+          className="mt-12 bg-lume-gold text-lume-black px-6 py-3 rounded-full font-body font-medium hover:bg-lume-black hover:text-lume-gold transition-all"
+        >
+          Back to Landing Page
+        </button>
       </div>
     </AppLayout>
   );

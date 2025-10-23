@@ -9,7 +9,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     await auth.signOut();
-    navigate("/login"); // redirect ke login
+    navigate("/"); // redirect ke LandingPage
   };
 
   return (
