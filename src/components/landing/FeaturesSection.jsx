@@ -6,7 +6,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="py-24 px-6 md:px-20 text-center bg-lume-white">
+    <section id="features" className="py-24 px-6 md:px-20 text-center bg-lume-white">
       <h2 className="font-display text-5xl font-semibold mb-12">Why Choose Lumé</h2>
       <div className="grid md:grid-cols-3 gap-10">
         {features.map((f, i) => (
@@ -19,3 +19,4 @@ export default function FeaturesSection() {
     </section>
   );
 }
+

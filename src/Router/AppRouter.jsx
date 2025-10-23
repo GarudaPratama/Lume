@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "../pages/LandingPage";
-import AppPage from "../pages/AppPage"; // rename dari App.jsx lama
+import AppPage from "../pages/AppPage";
 
 export default function AppRouter() {
   return (
@@ -13,3 +13,4 @@ export default function AppRouter() {
     </BrowserRouter>
   );
 }
+
