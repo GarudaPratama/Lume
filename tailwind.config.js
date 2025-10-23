@@ -2,23 +2,26 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-      },
       colors: {
         lume: {
-          light: "#d1fae5", // emerald-100
-          primary: "#10b981", // emerald-500
-          dark: "#064e3b", // emerald-900
+          black: "#0B0B0B",
+          white: "#FFFFFF",
+          gray: "#E5E5E5",
+          charcoal: "#2B2B2B",
+          silver: "#B8B8B8",
+          beige: "#F6F1EB",
+          gold: "#C0A776",
         },
+      },
+      fontFamily: {
+        display: ['"Playfair Display"', 'serif'], // untuk heading, brand, title
+        body: ['"Poppins"', 'sans-serif'],        // untuk teks utama
       },
     },
   },
   plugins: [],
 }
-
-
