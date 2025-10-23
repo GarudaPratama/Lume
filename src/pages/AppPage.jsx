@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import StepUpload from "./components/StepUpload";
-import StepPreferences from "./components/StepPreferences";
-import StepResult from "./components/StepResult";
-import Loader from "./components/Loader";
+import StepUpload from "../components/StepUpload";
+import StepPreferences from "../components/StepPreferences";
+import StepResult from "../components/StepResult";
+import Loader from "../components/Loader";
 
 function App() {
   const [step, setStep] = useState(1);
