@@ -1,15 +1,10 @@
-import React, { useEffect } from "react";
-
-export default function Loader({ onFinish }) {
-  useEffect(() => {
-    const timer = setTimeout(onFinish, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
+export default function Loader() {
   return (
-    <div className="text-center">
-      <div className="animate-spin border-4 border-emerald-500 border-t-transparent rounded-full w-16 h-16 mx-auto mb-4"></div>
-      <p>Generating your outfit suggestion...</p>
+    <div className="flex flex-col items-center justify-center py-20">
+      <div className="w-14 h-14 border-4 border-lume-gold border-t-transparent rounded-full animate-spin mb-6"></div>
+      <p className="font-body text-lume-charcoal text-lg">
+        Crafting your look with AI intelligence...
+      </p>
     </div>
   );
 }
