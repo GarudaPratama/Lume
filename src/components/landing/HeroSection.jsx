@@ -24,7 +24,7 @@ export default function HeroSection() {
           Discover the latest trends and styles to elevate your wardrobe.
         </p>
         <Link
-          to="/shop"
+          to="/signup"
           className="inline-block mt-8 bg-[#C36B3D] text-white px-8 py-3 rounded-md font-body font-medium hover:bg-[#a95c34] transition-all shadow-md"
         >
           Try Lume Now
