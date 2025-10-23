@@ -36,7 +36,7 @@ export default function Login() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 rounded-xl border border-lume-gray mb-4 bg-lume-white text-lume-black placeholder-lume-charcoal focus:border-lume-gold outline-none font-body"
+          className="w-full p-3 rounded-xl border border-lume-gray mb-4 bg-lume-white text-lume-black placeholder-lume-gray focus:border-lume-gold outline-none font-body"
           required
         />
 
@@ -45,7 +45,7 @@ export default function Login() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 rounded-xl border border-lume-gray mb-6 bg-lume-white text-lume-black placeholder-lume-charcoal focus:border-lume-gold outline-none font-body"
+          className="w-full p-3 rounded-xl border border-lume-gray mb-6 bg-lume-white text-lume-black placeholder-lume-gray focus:border-lume-gold outline-none font-body"
           required
         />
 
