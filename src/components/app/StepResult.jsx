@@ -6,9 +6,7 @@ export default function StepResult({ result, onRestart }) {
       </h2>
 
       <div className="bg-white rounded-2xl shadow-sm p-8 max-w-xl mx-auto">
-        <p className="font-body text-lg text-lume-charcoal mb-4 italic">
-          “{result?.summary}”
-        </p>
+        <p className="font-body text-lg text-lume-charcoal mb-4 italic">“{result?.summary}”</p>
         <p className="font-body text-lume-black">{result?.details}</p>
       </div>
 

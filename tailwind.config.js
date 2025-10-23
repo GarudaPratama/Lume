@@ -8,11 +8,11 @@ export default {
     extend: {
       colors: {
         lume: {
-          black: "#0B0B0B",
-          white: "#FFFFFF",
+          black: "#0B0B0B", // Header
+          white: "#FFFFFF", 
           gray: "#E5E5E5",
-          charcoal: "#2B2B2B",
-          silver: "#B8B8B8",
+          charcoal: "#2B2B2B", //Teks Kecil
+          silver: "#B8B8B8", 
           beige: "#F6F1EB",
           gold: "#C0A776",
         },

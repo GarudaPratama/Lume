@@ -31,9 +31,7 @@ export default function StepPreferences({ onBack, onGenerate }) {
         className="font-body text-lume-charcoal space-y-6 max-w-lg mx-auto"
       >
         <div>
-          <label className="block text-left font-medium mb-2">
-            Your fashion style
-          </label>
+          <label className="block text-left font-medium mb-2">Your fashion style</label>
           <select
             name="style"
             value={preferences.style}
@@ -50,9 +48,7 @@ export default function StepPreferences({ onBack, onGenerate }) {
         </div>
 
         <div>
-          <label className="block text-left font-medium mb-2">
-            Occasion or event
-          </label>
+          <label className="block text-left font-medium mb-2">Occasion or event</label>
           <input
             type="text"
             name="occasion"
@@ -64,9 +60,7 @@ export default function StepPreferences({ onBack, onGenerate }) {
         </div>
 
         <div>
-          <label className="block text-left font-medium mb-2">
-            Preferred color tone
-          </label>
+          <label className="block text-left font-medium mb-2">Preferred color tone</label>
           <select
             name="colorTone"
             value={preferences.colorTone}

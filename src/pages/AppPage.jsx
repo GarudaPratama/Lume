@@ -1,4 +1,3 @@
-// src/pages/AppPage.jsx
 import { useState } from "react";
 import AppLayout from "../components/app/AppLayout";
 import StepUpload from "../components/app/StepUpload";
@@ -30,9 +29,7 @@ export default function AppPage() {
   return (
     <AppLayout>
       <div className="max-w-3xl mx-auto text-center">
-        <h1 className="font-display text-4xl md:text-5xl mb-8">
-          Your Personal Stylist
-        </h1>
+        <h1 className="font-display text-4xl md:text-5xl mb-8">Your Personal Stylist</h1>
 
         {loading && <Loader />}
 

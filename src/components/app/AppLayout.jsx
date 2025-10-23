@@ -1,4 +1,3 @@
-// src/components/app/AppLayout.jsx
 import Navbar from "../common/Navbar";
 
 export default function AppLayout({ children }) {
