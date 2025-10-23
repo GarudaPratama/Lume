@@ -1,72 +1,42 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/app"); // redirect ke app setelah login
+      navigate("/app");
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-lume-beige px-6">
-      <form
-        onSubmit={handleLogin}
-        className="bg-lume-white p-10 rounded-3xl shadow-md w-full max-w-md text-center"
-      >
-        <h2 className="font-display text-3xl mb-6">Login to Lumé</h2>
-
-        {error && (
-          <p className="text-red-500 text-sm mb-4 font-body">{error}</p>
-        )}
-
+    <div className="min-h-screen flex items-center justify-center bg-lume-beige">
+      <form onSubmit={handleSubmit} className="bg-white p-10 rounded-3xl shadow-md w-full max-w-md">
+        <h2 className="font-display text-2xl mb-6 text-center">Login</h2>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 rounded-xl border border-lume-gray mb-4 bg-lume-white text-lume-black placeholder-lume-charcoal focus:border-lume-gold outline-none font-body"
-          required
+          className="w-full p-3 rounded-xl border border-lume-gray mb-4"
         />
-
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 rounded-xl border border-lume-gray mb-6 bg-lume-white text-lume-black placeholder-lume-charcoal focus:border-lume-gold outline-none font-body"
-          required
+          className="w-full p-3 rounded-xl border border-lume-gray mb-6"
         />
-
-        <button
-          type="submit"
-          className="w-full bg-lume-black text-lume-white py-3 rounded-full hover:bg-lume-gold hover:text-lume-black transition-all font-body font-medium"
-        >
-          Login
-        </button>
-
-        <p className="mt-4 text-sm font-body text-lume-charcoal">
-          Don't have an account?{" "}
-          <span
-            className="text-lume-gold cursor-pointer"
-            onClick={() => navigate("/signup")}
-          >
-            Sign Up
-          </span>
-        </p>
+        <button className="w-full bg-lume-black text-lume-white py-3 rounded-full hover:bg-lume-gold transition-all">Login</button>
       </form>
     </div>
   );

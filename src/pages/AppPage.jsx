@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import AppLayout from "../components/app/AppLayout";
 import StepUpload from "../components/app/StepUpload";
 import StepPreferences from "../components/app/StepPreferences";
@@ -17,7 +18,6 @@ export default function AppPage() {
 
   const handleGenerate = async (preferences) => {
     setLoading(true);
-    // simulasi AI generate
     setTimeout(() => {
       setOutfitResult({
         summary: `Elegant modern look for your ${preferences.occasion}`,
@@ -26,6 +26,12 @@ export default function AppPage() {
       setLoading(false);
       setStep(3);
     }, 1500);
+  };
+
+  const stepVariants = {
+    initial: { opacity: 0, x: 50 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -50 },
   };
 
   return (
@@ -37,19 +43,52 @@ export default function AppPage() {
 
         {loading && <Loader />}
 
-        {!loading && step === 1 && <StepUpload onNext={handleNext} />}
-        {!loading && step === 2 && (
-          <StepPreferences onBack={handleBack} onGenerate={handleGenerate} />
-        )}
-        {!loading && step === 3 && (
-          <StepResult
-            result={outfitResult}
-            onRestart={() => {
-              setStep(1);
-              setOutfitResult(null);
-            }}
-          />
-        )}
+        <AnimatePresence exitBeforeEnter>
+          {!loading && step === 1 && (
+            <motion.div
+              key="step1"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.5 }}
+            >
+              <StepUpload onNext={handleNext} />
+            </motion.div>
+          )}
+
+          {!loading && step === 2 && (
+            <motion.div
+              key="step2"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.5 }}
+            >
+              <StepPreferences onBack={handleBack} onGenerate={handleGenerate} />
+            </motion.div>
+          )}
+
+          {!loading && step === 3 && (
+            <motion.div
+              key="step3"
+              variants={stepVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.5 }}
+            >
+              <StepResult
+                result={outfitResult}
+                onRestart={() => {
+                  setStep(1);
+                  setOutfitResult(null);
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Tombol Back to LandingPage */}
         <button
