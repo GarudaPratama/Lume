@@ -1,21 +1,32 @@
 import { Link } from "react-router-dom";
-import modelImage from "../../assets/LUME.png"; // ganti sesuai path gambarmu
+import { motion, useScroll, useTransform } from "framer-motion";
+import modelImage from "../../assets/LUME.png";
 
 export default function HeroSection() {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center text-center bg-[#FAEEDC] overflow-hidden">
+  const { scrollY } = useScroll();
+  const yBg = useTransform(scrollY, [0, 500], [0, -50]); // background bergerak lebih lambat
+  const yContent = useTransform(scrollY, [0, 500], [0, 30]); // konten bergerak sedikit
 
-      <img
+  return (
+    <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+
+      {/* Parallax Background */}
+      <motion.img
+        style={{ y: yBg }}
         src={modelImage}
         alt="Model wearing outfit"
         className="absolute inset-0 w-full h-full object-cover"
       />
-
-
       <div className="absolute inset-0 bg-[#FAEEDC]/60" />
 
-
-      <div className="relative z-10 px-6 max-w-3xl">
+      {/* Animated & Parallax Content */}
+      <motion.div
+        style={{ y: yContent }}
+        className="relative z-10 px-6 max-w-3xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         <h1 className="font-display text-5xl md:text-6xl font-bold text-gray-800 leading-tight drop-shadow-md">
           Find Your <br />
           <span className="text-gray-900">Perfect Outfit</span>
@@ -29,8 +40,7 @@ export default function HeroSection() {
         >
           Try Lume Now
         </Link>
-      </div>
+      </motion.div>
     </section>
   );
 }
-
