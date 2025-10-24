@@ -4,6 +4,7 @@ import kahfi from "../../assets/testimonial1.png";
 import Bejeh from "../../assets/Bejeh.png";
 import zaki from "../../assets/zaki.png";
 import Tompel from "../../assets/Tompel.png";
+
 const testimonials = [
   {
     name: "Luthfi Anhar",
