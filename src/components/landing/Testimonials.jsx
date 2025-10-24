@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const testimonials = [
   {
-    name: "Alicia Morgan",
+    name: "Garuda Pratama",
     text: "Lumé helped me completely redefine my wardrobe — it's like having a personal stylist in my pocket!",
     role: "Fashion Enthusiast",
   },
