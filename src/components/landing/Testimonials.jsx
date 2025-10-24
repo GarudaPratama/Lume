@@ -82,7 +82,7 @@ export default function Testimonials() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="bg-lume-white rounded-2xl shadow-lg px-10 py-12 flex flex-col items-center"
           >
-
+            
             <img
               src={current.image}
               alt={current.name}
