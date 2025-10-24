@@ -6,21 +6,25 @@ const testimonials = [
     name: "Alicia Morgan",
     text: "Lumé helped me completely redefine my wardrobe — it's like having a personal stylist in my pocket!",
     role: "Fashion Enthusiast",
+    image: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=150&h=150&q=80",
   },
   {
     name: "Daniel Carter",
     text: "The AI recommendations are spot on! I’ve never felt more confident with my outfits.",
     role: "Creative Director",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80",
   },
   {
     name: "Sofia Nguyen",
     text: "Beautiful design, intuitive flow, and stunning results. Lumé makes fashion fun again!",
     role: "Model & Influencer",
+    image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=150&h=150&q=80",
   },
   {
     name: "Mikael Hart",
     text: "From the first click, Lumé feels premium and effortless. Every suggestion feels made just for me.",
     role: "Entrepreneur",
+    image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=150&h=150&q=80",
   },
 ];
 
@@ -28,7 +32,6 @@ export default function Testimonials() {
   const [index, setIndex] = useState(0);
   const length = testimonials.length;
 
-  // Auto-rotate every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % length);
@@ -41,7 +44,6 @@ export default function Testimonials() {
 
   const current = testimonials[index];
 
-  // Variants for fade-in on scroll
   const fadeIn = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -78,8 +80,14 @@ export default function Testimonials() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -40 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="bg-lume-white rounded-2xl shadow-lg px-10 py-12"
+            className="bg-lume-white rounded-2xl shadow-lg px-10 py-12 flex flex-col items-center"
           >
+
+            <img
+              src={current.image}
+              alt={current.name}
+              className="w-24 h-24 rounded-full object-cover mb-6 shadow-md"
+            />
             <p className="text-lg italic text-lume-charcoal mb-8">
               “{current.text}”
             </p>
@@ -90,7 +98,7 @@ export default function Testimonials() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Controls */}
+
         <button
           onClick={prevSlide}
           className="absolute left-0 top-1/2 -translate-y-1/2 bg-lume-black/20 hover:bg-lume-gold text-white hover:text-lume-black p-3 rounded-full transition-all"
@@ -104,7 +112,7 @@ export default function Testimonials() {
           ›
         </button>
 
-        {/* Indicators */}
+
         <div className="flex justify-center mt-8 space-x-2">
           {testimonials.map((_, i) => (
             <button
