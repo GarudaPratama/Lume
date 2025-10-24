@@ -4,13 +4,13 @@ import modelImage from "../../assets/LUME.png";
 
 export default function HeroSection() {
   const { scrollY } = useScroll();
-  const yBg = useTransform(scrollY, [0, 500], [0, -50]); // background bergerak lebih lambat
-  const yContent = useTransform(scrollY, [0, 500], [0, 30]); // konten bergerak sedikit
+  const yBg = useTransform(scrollY, [0, 500], [0, -50]);
+  const yContent = useTransform(scrollY, [0, 500], [0, 30]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
 
-      {/* Parallax Background */}
+
       <motion.img
         style={{ y: yBg }}
         src={modelImage}
@@ -19,7 +19,7 @@ export default function HeroSection() {
       />
       <div className="absolute inset-0 bg-[#FAEEDC]/60" />
 
-      {/* Animated & Parallax Content */}
+
       <motion.div
         style={{ y: yContent }}
         className="relative z-10 px-6 max-w-3xl"
