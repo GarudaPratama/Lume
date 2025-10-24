@@ -9,7 +9,7 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=150&h=150&q=80",
   },
   {
-    name: "Daniel Carter",
+    name: "Skechoo",
     text: "The AI recommendations are spot on! I’ve never felt more confident with my outfits.",
     role: "Creative Director",
     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80",
@@ -82,7 +82,7 @@ export default function Testimonials() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="bg-lume-white rounded-2xl shadow-lg px-10 py-12 flex flex-col items-center"
           >
-            
+
             <img
               src={current.image}
               alt={current.name}
