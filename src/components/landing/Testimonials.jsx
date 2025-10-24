@@ -1,31 +1,33 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import kahfi from "../../assets/testimonial1.png";
-
+import Bejeh from "../../assets/Bejeh.png";
+import zaki from "../../assets/zaki.png";
+import Tompel from "../../assets/Tompel.png";
 const testimonials = [
   {
-    name: "Garuda Pratama",
+    name: "Luthfi Anhar",
     text: "Lumé helped me completely redefine my wardrobe — it's like having a personal stylist in my pocket!",
     role: "Fashion Enthusiast",
-    image: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=150&h=150&q=80",
+    image: Tompel,
   },
   {
     name: "Kahfi Achyaruddin",
     text: "The AI recommendations are spot on! I’ve never felt more confident with my outfits.",
     role: "Creative Director",
-    image: kahfi, // ✅ langsung aja
+    image: kahfi,
   },
   {
-    name: "Sofia Nguyen",
+    name: "Zaki Abizar",
     text: "Beautiful design, intuitive flow, and stunning results. Lumé makes fashion fun again!",
     role: "Model & Influencer",
-    image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=150&h=150&q=80",
+    image: zaki,
   },
   {
-    name: "Mikael Hart",
+    name: "Fathi Dzahabi",
     text: "From the first click, Lumé feels premium and effortless. Every suggestion feels made just for me.",
     role: "Entrepreneur",
-    image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=150&h=150&q=80",
+    image: Bejeh,
   },
 ];
 
