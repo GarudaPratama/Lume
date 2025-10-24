@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import kahfi from "../../assets/testimonial1.png";
 
 const testimonials = [
   {
@@ -9,10 +10,10 @@ const testimonials = [
     image: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=150&h=150&q=80",
   },
   {
-    name: "Skechoo",
+    name: "Kahfi Achyaruddin",
     text: "The AI recommendations are spot on! I’ve never felt more confident with my outfits.",
     role: "Creative Director",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80",
+    image: kahfi, // ✅ langsung aja
   },
   {
     name: "Sofia Nguyen",
@@ -81,9 +82,8 @@ export default function Testimonials() {
             exit={{ opacity: 0, x: -40 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="bg-lume-white rounded-2xl shadow-lg px-10 py-12 flex flex-col items-center"
-          >
-
-            <img
+>
+  <img
               src={current.image}
               alt={current.name}
               className="w-24 h-24 rounded-full object-cover mb-6 shadow-md"
@@ -98,7 +98,6 @@ export default function Testimonials() {
           </motion.div>
         </AnimatePresence>
 
-
         <button
           onClick={prevSlide}
           className="absolute left-0 top-1/2 -translate-y-1/2 bg-lume-black/20 hover:bg-lume-gold text-white hover:text-lume-black p-3 rounded-full transition-all"
@@ -111,7 +110,6 @@ export default function Testimonials() {
         >
           ›
         </button>
-
 
         <div className="flex justify-center mt-8 space-x-2">
           {testimonials.map((_, i) => (
