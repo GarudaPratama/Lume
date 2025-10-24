@@ -10,22 +10,48 @@ import Loader from "../components/app/Loader";
 export default function AppPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState(null);
   const [outfitResult, setOutfitResult] = useState(null);
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
 
+  // Convert file to base64
+  const fileToBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+    });
+
   const handleGenerate = async (preferences) => {
+    if (!uploadedFile) return alert("Please upload an image first ✨");
     setLoading(true);
-    setTimeout(() => {
-      setOutfitResult({
-        summary: `Elegant modern look for your ${preferences.occasion}`,
-        details: "White silk blouse, beige trousers, and gold accessories.",
+
+    try {
+      const base64 = await fileToBase64(uploadedFile);
+
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageBase64: base64, preferences }),
       });
-      setLoading(false);
+
+      if (!response.ok) throw new Error("Failed to generate outfit");
+
+      const data = await response.json();
+      setOutfitResult(data.result);
+      setProducts(data.products || []);
       setStep(3);
-    }, 1500);
+    } catch (err) {
+      console.error("Error generating outfit:", err);
+      alert("Failed to generate outfit 😓. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const stepVariants = {
@@ -43,7 +69,7 @@ export default function AppPage() {
 
         {loading && <Loader />}
 
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           {!loading && step === 1 && (
             <motion.div
               key="step1"
@@ -53,7 +79,11 @@ export default function AppPage() {
               exit="exit"
               transition={{ duration: 0.5 }}
             >
-              <StepUpload onNext={handleNext} />
+              <StepUpload
+                uploadedFile={uploadedFile}
+                setUploadedFile={setUploadedFile}
+                onNext={handleNext}
+              />
             </motion.div>
           )}
 
@@ -66,7 +96,10 @@ export default function AppPage() {
               exit="exit"
               transition={{ duration: 0.5 }}
             >
-              <StepPreferences onBack={handleBack} onGenerate={handleGenerate} />
+              <StepPreferences
+                onBack={handleBack}
+                onGenerate={handleGenerate}
+              />
             </motion.div>
           )}
 
@@ -81,16 +114,18 @@ export default function AppPage() {
             >
               <StepResult
                 result={outfitResult}
+                products={products}
                 onRestart={() => {
                   setStep(1);
+                  setUploadedFile(null);
                   setOutfitResult(null);
+                  setProducts([]);
                 }}
               />
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Tombol Back to LandingPage */}
         <button
           onClick={() => navigate("/")}
           className="mt-12 bg-lume-gold text-lume-black px-6 py-3 rounded-full font-body font-medium hover:bg-lume-black hover:text-lume-gold transition-all"

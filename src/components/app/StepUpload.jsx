@@ -1,46 +1,52 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
-export default function StepUpload({ onNext }) {
-  const [selectedFile, setSelectedFile] = useState(null);
+export default function StepUpload({ uploadedFile, setUploadedFile, onNext }) {
+  const [preview, setPreview] = useState(uploadedFile ? URL.createObjectURL(uploadedFile) : null);
 
   const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
-  };
-
-  const handleContinue = () => {
-    if (selectedFile) onNext();
-    else alert("Please upload an image first ✨");
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploadedFile(file);
+    setPreview(URL.createObjectURL(file));
   };
 
   return (
-    <section className="bg-lume-beige p-10 rounded-3xl shadow-md text-center">
-      <h2 className="font-display text-3xl md:text-4xl text-lume-black mb-4">
-        Upload Your Inspiration
+    <motion.div
+      className="bg-lume-beige p-10 rounded-3xl shadow-md text-center max-w-md mx-auto"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+    >
+      <h2 className="font-display text-3xl mb-6 text-lume-black">
+        Upload Your Outfit Image ✨
       </h2>
-      <p className="font-body text-lume-charcoal text-base md:text-lg mb-8 max-w-md mx-auto">
-        Upload a photo of your outfit or inspiration. Lumé’s AI will analyze it and craft the perfect look just for you.
-      </p>
 
-      <div className="border-2 border-dashed border-lume-gray rounded-2xl p-10 mb-6 bg-white hover:border-lume-gold transition-colors">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="block w-full text-center cursor-pointer file:rounded-full file:px-6 file:py-3 file:bg-lume-black file:text-lume-white file:hover:bg-lume-gold file:hover:text-lume-black transition-all"
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        className="mb-6"
+      />
+
+      {preview && (
+        <img
+          src={preview}
+          alt="Preview"
+          className="w-full max-w-xs mx-auto rounded-2xl shadow-md mb-6"
         />
-        {selectedFile && (
-          <p className="mt-4 font-body text-lume-gold">
-            ✅ {selectedFile.name}
-          </p>
-        )}
-      </div>
+      )}
 
       <button
-        onClick={handleContinue}
-        className="mt-4 bg-lume-black text-lume-white px-8 py-3 rounded-full font-body font-medium hover:bg-lume-gold hover:text-lume-black transition-all"
+        onClick={onNext}
+        disabled={!uploadedFile}
+        className={`px-6 py-3 rounded-full font-body font-medium transition-all ${
+          uploadedFile
+            ? "bg-lume-black text-lume-white hover:bg-lume-gold hover:text-lume-black"
+            : "bg-gray-300 text-gray-600 cursor-not-allowed"
+        }`}
       >
-        Continue
+        Next
       </button>
-    </section>
+    </motion.div>
   );
 }

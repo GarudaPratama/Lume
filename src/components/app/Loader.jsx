@@ -1,11 +1,8 @@
+// src/components/app/Loader.jsx
 export default function Loader() {
   return (
-    <div className="flex flex-col items-center justify-center py-20">
-      <div className="w-14 h-14 border-4 border-lume-gold border-t-transparent rounded-full animate-spin mb-6"></div>
-      <p className="font-body text-lume-charcoal text-lg">
-        Crafting your look with AI intelligence...
-      </p>
+    <div className="flex justify-center items-center my-6">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
     </div>
   );
 }
-
