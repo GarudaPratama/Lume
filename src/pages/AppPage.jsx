@@ -41,7 +41,7 @@ export default function AppPage() {
     try {
       const base64 = await fileToBase64(uploadedFile);
 
-      const response = await fetch("http://localhost:3001/api/generate", {
+      const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ imageBase64: base64, preferences }),
