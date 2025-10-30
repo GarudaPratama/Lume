@@ -32,10 +32,11 @@ export default function AppPage() {
     try {
       const base64 = await fileToBase64(uploadedFile);
       const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageBase64: base64, preferences }),
-      });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ preferences }),
+});
+
       if (!response.ok) throw new Error("Failed to generate outfit");
       const data = await response.json();
       setOutfitResult(data.result);
