@@ -30,7 +30,7 @@ function saveBase64Image(dataUrl) {
   return filename;
 }
 
-app.post("/generate", async (req, res) => {
+app.post("/api/generate", async (req, res) => {
   try {
     const { imageBase64, preferences } = req.body;
     const filename = saveBase64Image(imageBase64);
