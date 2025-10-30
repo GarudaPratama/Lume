@@ -11,14 +11,21 @@ export default function AppPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState(null); // <-- baru
   const [outfitResult, setOutfitResult] = useState(null);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
-  const handleNext = () => setStep((prev) => prev + 1);
+  const handleNext = () => {
+    if (uploadedFile) {
+      setUploadedImageUrl(URL.createObjectURL(uploadedFile)); // preview di result
+      setStep((prev) => prev + 1);
+    } else {
+      alert("Please upload an image first ✨");
+    }
+  };
   const handleBack = () => setStep((prev) => prev - 1);
 
-  // Convert file to base64
   const fileToBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -34,7 +41,7 @@ export default function AppPage() {
     try {
       const base64 = await fileToBase64(uploadedFile);
 
-      const response = await fetch("/api/generate", {
+      const response = await fetch("http://localhost:3001/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ imageBase64: base64, preferences }),
@@ -48,7 +55,7 @@ export default function AppPage() {
       setStep(3);
     } catch (err) {
       console.error("Error generating outfit:", err);
-      alert("Failed to generate outfit 😓. Try again.");
+      alert("Failed to generate outfit 😓 Try again.");
     } finally {
       setLoading(false);
     }
@@ -115,9 +122,11 @@ export default function AppPage() {
               <StepResult
                 result={outfitResult}
                 products={products}
+                uploadedImageUrl={uploadedImageUrl} // <-- preview image
                 onRestart={() => {
                   setStep(1);
                   setUploadedFile(null);
+                  setUploadedImageUrl(null);
                   setOutfitResult(null);
                   setProducts([]);
                 }}

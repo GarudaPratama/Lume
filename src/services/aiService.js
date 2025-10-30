@@ -1,14 +1,12 @@
 // src/services/aiService.js
-export async function generateOutfit(file, preferences) {
-  const formData = new FormData();
-  formData.append("image", file);
-  formData.append("preferences", JSON.stringify(preferences));
-
+export async function generateOutfit(imageBase64, preferences) {
   const res = await fetch("http://localhost:5000/api/generate", {
     method: "POST",
-    body: formData,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ imageBase64, preferences }),
   });
 
-  if (!res.ok) throw new Error("Failed to generate outfit");
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Failed");
+  return data;
 }

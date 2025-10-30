@@ -12,8 +12,8 @@ export default function LandingPage() {
       <Navbar />
       <HeroSection />
       <FeaturesSection />
-      <Superiority />
       <Testimonials />
+      <Superiority />
       <CTASection />
       <Footer />
     </div>

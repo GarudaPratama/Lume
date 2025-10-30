@@ -1,48 +1,53 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function StepUpload({ uploadedFile, setUploadedFile, onNext }) {
-  const [preview, setPreview] = useState(uploadedFile ? URL.createObjectURL(uploadedFile) : null);
+  const containerVariants = {
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -50 },
+  };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setUploadedFile(file);
-    setPreview(URL.createObjectURL(file));
+    if (e.target.files && e.target.files[0]) {
+      setUploadedFile(e.target.files[0]);
+    }
   };
 
   return (
     <motion.div
-      className="bg-lume-beige p-10 rounded-3xl shadow-md text-center max-w-md mx-auto"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 0.5 }}
+      className="space-y-6"
     >
-      <h2 className="font-display text-3xl mb-6 text-lume-black">
-        Upload Your Outfit Image ✨
-      </h2>
+      <h2 className="text-xl font-semibold mb-4">Upload Your Outfit Photo</h2>
 
       <input
         type="file"
         accept="image/*"
         onChange={handleFileChange}
-        className="mb-6"
+        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
       />
 
-      {preview && (
-        <img
-          src={preview}
-          alt="Preview"
-          className="w-full max-w-xs mx-auto rounded-2xl shadow-md mb-6"
-        />
+      {uploadedFile && (
+        <div className="mt-4">
+          <img
+            src={URL.createObjectURL(uploadedFile)}
+            alt="Preview"
+            className="w-full max-w-md mx-auto rounded-lg shadow-lg"
+          />
+        </div>
       )}
 
       <button
         onClick={onNext}
         disabled={!uploadedFile}
-        className={`px-6 py-3 rounded-full font-body font-medium transition-all ${
+        className={`mt-6 px-6 py-3 rounded-full font-medium transition-all ${
           uploadedFile
-            ? "bg-lume-black text-lume-white hover:bg-lume-gold hover:text-lume-black"
-            : "bg-gray-300 text-gray-600 cursor-not-allowed"
+            ? "bg-lume-gold text-lume-black hover:bg-lume-black hover:text-lume-gold"
+            : "bg-gray-300 text-gray-500 cursor-not-allowed"
         }`}
       >
         Next

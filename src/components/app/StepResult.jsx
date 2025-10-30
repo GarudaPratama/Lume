@@ -1,92 +1,90 @@
 import { motion } from "framer-motion";
 
-export default function StepResult({ result, products, onRestart }) {
+export default function StepResult({ result, products, imageUrl, onRestart }) {
   if (!result) return null;
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  const containerVariants = {
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -50 },
+  };
+
+  const itemVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
   };
 
   return (
-    <motion.section
-      className="bg-lume-beige p-10 rounded-3xl shadow-md text-center"
-      variants={fadeIn}
-      initial="hidden"
-      animate="visible"
+    <motion.div
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 0.5 }}
+      className="space-y-8"
     >
-      <h2 className="font-display text-3xl mb-6 text-lume-black">
-        Your AI-Recommended Look ✨
-      </h2>
-
-      {result.imageUrl && (
-        <motion.img
-          src={result.imageUrl}
-          alt="Generated Outfit"
-          className="w-full max-w-md mx-auto rounded-2xl shadow-md mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        />
+      {/* Preview Image */}
+      {imageUrl && (
+        <motion.div variants={itemVariants} className="w-full max-w-md mx-auto">
+          <img
+            src={imageUrl}
+            alt="Uploaded Outfit"
+            className="w-full rounded-xl shadow-lg"
+          />
+        </motion.div>
       )}
 
-      <div className="bg-white rounded-2xl shadow-sm p-8 max-w-xl mx-auto mb-12">
-        <p className="font-body text-lg text-lume-charcoal mb-4 italic">
-          “{result.summary || "Your custom AI look is ready!"}”
-        </p>
-      </div>
+      {/* Ringkasan Outfit */}
+      <motion.div
+        variants={itemVariants}
+        className="bg-white p-6 rounded-2xl shadow-md"
+      >
+        <h2 className="text-2xl font-semibold mb-2">{result.summary}</h2>
+        <p className="text-gray-700">{result.details}</p>
+      </motion.div>
 
-      {products && products.length > 0 && (
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.2 }}
-        >
-          <h3 className="font-display text-2xl text-lume-black mb-6">
-            Recommended Items for Your Look 💅
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {products.map((p, i) => (
-              <div
-                key={i}
-                className="bg-white p-4 rounded-2xl shadow hover:shadow-lg transition-all"
+      {/* Produk */}
+      {products.length > 0 && (
+        <motion.div variants={itemVariants}>
+          <h3 className="text-xl font-semibold mb-4">Recommended Products</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {products.map((product, idx) => (
+              <motion.a
+                key={idx}
+                href={product.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-xl shadow p-4 flex flex-col items-center hover:shadow-lg transition"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
               >
                 <img
-                  src={p.image}
-                  alt={p.name}
-                  className="w-full h-40 object-cover rounded-xl mb-4"
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-48 object-cover rounded-lg mb-2"
                 />
-                <h4 className="font-body text-sm text-lume-black line-clamp-2 mb-2">
-                  {p.name}
-                </h4>
-                <p className="font-body text-lume-gold font-semibold mb-3">
-                  {p.price}
-                </p>
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-lume-black text-lume-white text-sm py-2 rounded-full hover:bg-lume-gold hover:text-lume-black transition-all"
-                >
-                  Buy Now →
-                </a>
-                {p.store && (
-                  <p className="text-xs text-lume-charcoal mt-2">from {p.store}</p>
+                <h4 className="font-medium text-center">{product.name}</h4>
+                {product.price && (
+                  <p className="text-lume-gold font-semibold mt-1">
+                    ${product.price}
+                  </p>
                 )}
-              </div>
+              </motion.a>
             ))}
           </div>
         </motion.div>
       )}
 
-      <button
-        onClick={onRestart}
-        className="mt-12 bg-lume-black text-lume-white px-8 py-3 rounded-full font-body hover:bg-lume-gold hover:text-lume-black transition-all"
-      >
-        Start Again
-      </button>
-    </motion.section>
+      {/* Restart Button */}
+      <motion.div variants={itemVariants} className="mt-6">
+        <button
+          onClick={onRestart}
+          className="bg-lume-black text-lume-gold px-6 py-3 rounded-full font-medium hover:bg-lume-gold hover:text-lume-black transition-all"
+        >
+          Restart
+        </button>
+      </motion.div>
+    </motion.div>
   );
 }
-  
