@@ -6,20 +6,29 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/api/generate", (req, res) => {
+  // Dummy AI response
   const { preferences } = req.body;
-
-  const result = {
-    summary: "Casual Party Outfit",
-    details: `A fun and comfortable outfit perfect for ${preferences?.occasion || "any occasion"}, in a ${preferences?.style || "casual"} style.`,
-  };
-
-  const products = [
-    { name: "Red T-Shirt", image: "https://via.placeholder.com/150", price: "25", url: "#" },
-    { name: "Blue Jeans", image: "https://via.placeholder.com/150", price: "40", url: "#" },
-    { name: "Sneakers", image: "https://via.placeholder.com/150", price: "60", url: "#" },
-  ];
-
-  res.json({ result, products });
+  res.json({
+    result: {
+      imageUrl: "https://via.placeholder.com/400x400.png?text=Outfit+Preview",
+      summary: "Casual Look",
+      details: `A simple ${preferences?.style || "casual"} outfit perfect for ${preferences?.occasion || "everyday"} activities.`
+    },
+    products: [
+      {
+        name: "Cool T-Shirt",
+        image: "https://via.placeholder.com/200x200.png?text=T-Shirt",
+        url: "#",
+        price: "25"
+      },
+      {
+        name: "Jeans",
+        image: "https://via.placeholder.com/200x200.png?text=Jeans",
+        url: "#",
+        price: "40"
+      }
+    ]
+  });
 });
 
-export default app;
+app.listen(3001, () => console.log("✅ API running on port 3001"));
