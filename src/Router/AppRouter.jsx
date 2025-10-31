@@ -1,5 +1,5 @@
 // src/Router/AppRouter.jsx
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import LandingPage from "../pages/LandingPage";
 import AppPage from "../pages/AppPage";
@@ -33,7 +33,7 @@ export default function AppRouter() {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><LandingPage /></PageTransition>} />
         <Route path="/signup" element={<PageTransition><SignUp /></PageTransition>} />

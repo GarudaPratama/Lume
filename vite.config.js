@@ -6,6 +6,5 @@ export default defineConfig({
   base: "/",   // WAJIB, karena deploy di root domain
   build: {
     outDir: "dist",
-    emptyOutDir: true,
   }
 });
