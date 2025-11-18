@@ -11,7 +11,7 @@ import { auth } from "../firebase/config";
 // PrivateRoute: hanya bisa diakses jika user login
 function PrivateRoute({ children }) {
   const [user] = useAuthState(auth);
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/" replace />;
   return children;
 }
 

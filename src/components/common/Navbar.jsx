@@ -8,9 +8,13 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await auth.signOut();
-    navigate("/"); // redirect ke LandingPage
-  };
+  // pindah HALAMAN dulu SEBELUM benar-benar logout
+  navigate("/", { replace: true });
+
+  // baru sign out supaya PrivateRoute tidak menangkap perubahan user di /app
+  await auth.signOut();
+};
+
 
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-lume-white shadow-md">
